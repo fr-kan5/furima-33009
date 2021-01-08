@@ -6,13 +6,13 @@ RSpec.describe User, type: :model do
       @user = FactoryBot.build(:user)
     end
 
-    context '商品出品ができる時' do
+    context 'ユーザー登録ができる時' do
       it '全ての情報が入力されていると登録できる' do
         expect(@user).to be_valid
       end
     end
 
-    context '商品出品ができない時' do
+    context 'ユーザー登録ができない時' do
       it 'nicknameが空では登録できない' do
         @user.nickname = nil
         @user.valid?
