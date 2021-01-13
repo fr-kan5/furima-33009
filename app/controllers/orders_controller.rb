@@ -9,6 +9,12 @@ class OrdersController < ApplicationController
 
   def create
     @item_order = ItemOrder.new(order_params)
+    if @item_order.valid?
+      @item_order.save
+      return redirect_to root_path
+    else
+      render action: :index
+    end
     
   end
 
