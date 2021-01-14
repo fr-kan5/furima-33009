@@ -6,6 +6,16 @@ RSpec.describe ItemOrder, type: :model do
   end
   
   describe '商品購入機能' do
+    context '商品を購入できる場合' do
+      it '全ての値が正しく入力されていると登録できる' do
+        expect(@item_order).to be_valid
+      end
+      it 'building以外が正しく入力されていると登録できる' do
+        @item_order.building = nil
+        expect(@item_order).to be_valid
+      end
+    end
+
 
     context '商品を購入できない場合' do
       it 'postal_codeが空では登録できない' do
@@ -67,6 +77,21 @@ RSpec.describe ItemOrder, type: :model do
         @item_order.phone_number = 'abcde123456'
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'tokenが空では登録できない' do
+        @item_order.token = nil
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空では登録できない' do
+        @item_order.user_id = nil
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空では登録できない' do
+        @item_order.item_id = nil
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
