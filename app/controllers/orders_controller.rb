@@ -35,6 +35,7 @@ class OrdersController < ApplicationController
     if current_user.id == @item.user.id
       redirect_to root_path
     end
+  end
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
@@ -43,5 +44,5 @@ class OrdersController < ApplicationController
         card: order_params[:token],
         currency: 'jpy'
       )
-    end
+  end
 end
